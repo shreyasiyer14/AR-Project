@@ -17,10 +17,10 @@ public class ModelController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isWalking) {
+		if (!isWalking && idleAnim != "") {
 			GetComponent<Animation> ().wrapMode = WrapMode.Loop;
 			GetComponent<Animation> ().CrossFade (idleAnim);
-		} else {
+		} else if (isWalking) {
 			GetComponent<Animation> ().CrossFade (walkAnim);
 			transform.Translate (directionOfWalk * Vector3.forward * speed * Time.fixedDeltaTime);
 		}
