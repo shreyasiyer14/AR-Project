@@ -12,7 +12,7 @@ public class LightsensorValue : MonoBehaviour
     void Start()
     {
         txt = gameObject.GetComponent<Text>();
-        txt.text = Sensor.light + "";
+        txt.text = Sensor.light + "";   
     }
 
     // Update is called once per frame
