@@ -9,5 +9,6 @@
 *.pidb
 *.userprefs
 
+*.apk
 .DS_Store
 *.swp
