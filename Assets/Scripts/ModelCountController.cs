@@ -42,10 +42,10 @@ public class ModelCountController : MonoBehaviour
         {
             while (count < value)
             {
-                float radius = 0.1f;
+				float radius = Random.Range(1,5)/12f;
                 int angle = Random.Range(0, 360);
                 Vector3 pos = new Vector3(radius * Mathf.Cos(angle), 0, radius * Mathf.Sin(angle));
-                GameObject newObj = Object.Instantiate(tem, tobj.position + pos, tobj.rotation, tobj);
+				GameObject newObj = Object.Instantiate(tem, tem.transform.position + pos, tem.transform.rotation, tobj);
                 newObj.SetActive(true);
                 count++;
             }

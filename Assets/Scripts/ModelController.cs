@@ -8,8 +8,9 @@ public class ModelController : MonoBehaviour {
 	[SerializeField] private float speed;
 	[SerializeField] private int directionOfWalk;
 	[SerializeField] private Slider scaleSlider;
+
 	private float scale;
-	private bool isWalking = false;
+	public bool isWalking = false;
 	// Use this for initialization
 	void Start () {
 		
@@ -27,10 +28,16 @@ public class ModelController : MonoBehaviour {
 	}
 
 	public void modifyScale () {
-		transform.localScale = new Vector3 (scaleSlider.value, scaleSlider.value, scaleSlider.value);
+		GameObject[] models = GameObject.FindGameObjectsWithTag (gameObject.tag);
+		foreach (GameObject model in models) {
+			model.transform.localScale = new Vector3 (scaleSlider.value, scaleSlider.value, scaleSlider.value);
+		}
 	}
 
 	public void walkAnimStart () {
-		isWalking = true;
+		GameObject[] models = GameObject.FindGameObjectsWithTag (gameObject.tag);
+		foreach (GameObject model in models) {
+			model.GetComponent<ModelController> ().isWalking = true;
+		}
 	}
 }
