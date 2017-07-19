@@ -13,17 +13,19 @@ public class InsectSelectorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        string[] tags = new[] { "Spider", "Butterfly", "Serpent" };
         Transform tobj = obj.transform;
         int n= tobj.childCount;
         int current = dr.value;
         for(int i=0;i<n;i++)
         {
-            if (i == current)
+            GameObject temp = tobj.GetChild(i).gameObject;
+            if (temp.tag == tags[current])
             {
-                tobj.GetChild(i).gameObject.SetActive(true);
+                temp.SetActive(true);
             }
             else
-                tobj.GetChild(i).gameObject.SetActive(false);
+                temp.SetActive(false);
         }
 	}
 }
