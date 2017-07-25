@@ -10,10 +10,14 @@ public class ModelController : MonoBehaviour {
 	[SerializeField] private Slider scaleSlider;
 
 	private float scale;
+	private Quaternion targetRotation;
+
+	private bool isRotChanged = false;
 	public bool isWalking = false;
 	// Use this for initialization
 	void Start () {
-		
+		targetRotation = transform.rotation;	
+		StartCoroutine ("startRotation");
 	}
 	
 	// Update is called once per frame
@@ -38,6 +42,20 @@ public class ModelController : MonoBehaviour {
 		GameObject[] models = GameObject.FindGameObjectsWithTag (gameObject.tag);
 		foreach (GameObject model in models) {
 			model.GetComponent<ModelController> ().isWalking = true;
+		}
+		isRotChanged = true;
+	}
+
+	IEnumerator startRotation () {
+		while (true) {
+			isRotChanged = false;
+			yield return new WaitForSeconds (3f);
+			isRotChanged = true;
+			yield return new WaitForSeconds (1f);
+			if (isRotChanged) {
+				targetRotation *= Quaternion.AngleAxis (60, Vector3.up);
+				transform.rotation = Quaternion.Lerp (transform.rotation, targetRotation, 10f * Time.deltaTime); 
+			}
 		}
 	}
 }
