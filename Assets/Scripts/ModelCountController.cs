@@ -16,7 +16,7 @@ public class ModelCountController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void CountUpdate()
     {
         string[] tags = new[] { "Spider", "Butterfly", "Serpent" };
         int current =dr.value;
