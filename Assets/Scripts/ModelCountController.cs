@@ -14,6 +14,7 @@ public class ModelCountController : MonoBehaviour
     {
         //int current = dr.value;
         Transform tobj = obj.transform;
+        tobj.GetChild(0).gameObject.SetActive(true);
         int n= tobj.childCount;
         tags = new string[n];
         for(int i=0;i<n;i++)
@@ -32,9 +33,10 @@ public class ModelCountController : MonoBehaviour
         for (int i = 0; i < n; i++)
         {
             GameObject temp = tobj.GetChild(i).gameObject;
-            if (tags[current]==temp.tag && temp.activeSelf==true)
+            if (tags[current]==temp.tag)
             {
                 count++;
+                temp.SetActive(true);
             }
             else
                 temp.SetActive(false);
@@ -68,6 +70,22 @@ public class ModelCountController : MonoBehaviour
                     count--;
                 }
             }
+        }
+    }
+    public void ModelUpdate()
+    {
+        Transform tobj = obj.transform;
+        int n = tobj.childCount;
+        int current = dr.value;
+        for (int i = 0; i < n; i++)
+        {
+            GameObject temp = tobj.GetChild(i).gameObject;
+            if (temp.tag == tags[current])
+            {
+                temp.SetActive(true);
+            }
+            else
+                temp.SetActive(false);
         }
     }
 }
