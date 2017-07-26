@@ -8,17 +8,22 @@ public class ModelCountController : MonoBehaviour
     public Slider sl;
     public GameObject obj;
     public Dropdown dr;
+    private string[] tags;
     // Use this for initialization
     void Start()
     {
         //int current = dr.value;
-        ;
+        Transform tobj = obj.transform;
+        int n= tobj.childCount;
+        tags = new string[n];
+        for(int i=0;i<n;i++)
+        {
+            tags[i] = tobj.GetChild(i).gameObject.tag;
+        }
     }
 
-    // Update is called once per frame
     public void CountUpdate()
     {
-        string[] tags = new[] { "Spider", "Butterfly", "Serpent" };
         int current =dr.value;
         Transform tobj = obj.transform;
         int n = tobj.childCount;
