@@ -8,7 +8,7 @@
 <ul>
 <li>Unity3D Game Engine (v5.6)</li>
 <li>Wikitude SDK / Kudan SDK / Vuforia SDK</li>
-<li>Unity Relay servers and UNetworkManager for the server/client model</li>
+<li>Photon Unity Networkingl</li>
 </ul>
 
 ## Features to be developed:
