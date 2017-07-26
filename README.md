@@ -8,13 +8,13 @@
 <ul>
 <li>Unity3D Game Engine (v5.6)</li>
 <li>Wikitude SDK / Kudan SDK / Vuforia SDK</li>
-<li>Photon Unity Networkingl</li>
+<li>Photon Unity Networking</li>
 </ul>
 
 ## Features to be developed:
 <i>More features to be introduced as the project progresses ... </i>
 <ul>
 <li>Markerless AR approach, using SLAM-based technology (Geo-tracking)</li>
-<li>Server-client model, wherein majority of the controls are present with the server model, which controls the scene in the client</li>
+<li>Server-client model, wherein majority of the controls, for controlling the movement, scale, and other factors of the augmented model, are present with the server model, which controls the scene in the client</li>
 <li>Different kinds of virtual objects (depending on the particular Phobia) can be augmented as per the server-operator's decision</li>
 </ul>
