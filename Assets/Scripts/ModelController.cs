@@ -8,8 +8,9 @@ public class ModelController : MonoBehaviour {
 	[SerializeField] private float speed;
 	[SerializeField] private int directionOfWalk;
 	[SerializeField] private Slider scaleSlider;
-
-	private float scale;
+    [SerializeField] private Dropdown insectDropdown;
+    [SerializeField] private Slider countSlider;
+    private float scale;
 	private Quaternion targetRotation;
 
 	private bool isRotChanged = false;
@@ -58,4 +59,65 @@ public class ModelController : MonoBehaviour {
 			}
 		}
 	}
+    public void modifyState()
+    {
+        GameObject[] models = GameObject.FindGameObjectsWithTag(gameObject.tag);
+        bool state = false;
+        int menuIndex = insectDropdown.GetComponent<Dropdown>().value;
+        List<Dropdown.OptionData> menuOptions = insectDropdown.GetComponent<Dropdown>().options;
+        string value = menuOptions[menuIndex].text;
+        //Debug.Log(gameObject.tag +" "+ value);
+        if (value == gameObject.tag)
+        {
+            state = true;
+            gameObject.SetActive(true);
+        }
+        foreach (GameObject model in models)
+        {
+            Debug.Log(gameObject.tag + " " + value);
+            model.SetActive(state);
+        }
+        modifyCount();
+    }
+    public void modifyCount()
+    {
+        if (gameObject.activeSelf == false)
+            return;
+        GameObject[] models = GameObject.FindGameObjectsWithTag(gameObject.tag);
+        int count = (int)countSlider.value;
+        if (count == models.Length)
+        {
+            return;
+        }
+        else if(count > models.Length)
+        {
+            bool state = gameObject.activeSelf;
+            int added = 0;
+            while (count > models.Length + added)
+            {
+                float radius = Random.Range(1, 5) / 12f;
+                int angle = Random.Range(0, 360);
+                Vector3 pos = new Vector3(radius * Mathf.Cos(angle), 0, radius * Mathf.Sin(angle));
+                GameObject newObj = Object.Instantiate(gameObject, gameObject.transform.position + pos, gameObject.transform.rotation, gameObject.transform.parent.transform);
+                newObj.SetActive(state);
+                added++;
+            }
+        }
+        else
+        {
+            int deleted = 0;
+            for(int i=0; count < models.Length - deleted && i <models.Length;i++)
+            {
+                if(models[i]==gameObject)
+                {
+                    continue;
+                }
+                else
+                {
+                    Object.Destroy(models[i]);
+                    deleted++;
+                }
+            }
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class InsectSelectorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        string[] tags = new[] { "Spider", "Butterfly", "Serpent" };
+        /*string[] tags = new[] { "Spider", "Butterfly", "Serpent" };
         Transform tobj = obj.transform;
         int n= tobj.childCount;
         int current = dr.value;
@@ -26,6 +26,6 @@ public class InsectSelectorController : MonoBehaviour {
             }
             else
                 temp.SetActive(false);
-        }
+        }*/
 	}
 }

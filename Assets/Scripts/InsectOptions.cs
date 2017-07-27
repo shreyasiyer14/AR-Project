@@ -9,10 +9,10 @@ public class InsectOptions : MonoBehaviour {
 	void Start () {
         Transform tobj = obj.transform;
         int n = tobj.childCount;
-        for(int i=0;i<n;i++)
+        /*for(int i=0;i<n;i++)
         {
             dr.options.Add(new Dropdown.OptionData(tobj.GetChild(i).gameObject.tag));
-        }
+        }*/
 	}
 	
 	// Update is called once per frame
