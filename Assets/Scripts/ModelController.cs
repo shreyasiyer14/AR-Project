@@ -140,20 +140,35 @@ public class ModelController : MonoBehaviour {
         modifyCount();
     }
 
-    public void sendSize()
+    public void sendScale()
     {
         if (PhotonNetwork.isMasterClient)
         {
             PhotonView photonView = PhotonView.Get(this);
-            photonView.RPC("SyncSizeRPC", PhotonTargets.All, scaleSlider.value);
+            photonView.RPC("SyncScaleRPC", PhotonTargets.All, scaleSlider.value);
         }
     }
     [PunRPC]
-    void SyncSizeRPC(float value)
+    void SyncScaleRPC(float value)
     {
         scaleSlider.value = value;
         //Debug.Log("" + PhotonNetwork.isMasterClient);
         modifyScale();
     }
 
+    public void sendActiveModel()
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("SyncActiveModelRPC", PhotonTargets.All, insectDropdown.value);
+        }
+    }
+    [PunRPC]
+    void SyncActiveModelRPC(int value)
+    {
+        insectDropdown.value = value;
+        //Debug.Log("" + PhotonNetwork.isMasterClient);
+        modifyState();
+    }
 }
