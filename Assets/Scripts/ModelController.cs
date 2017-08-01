@@ -19,6 +19,8 @@ public class ModelController : MonoBehaviour {
 	void Start () {
 		targetRotation = transform.rotation;	
 		StartCoroutine ("startRotation");
+        modifyState();
+
 	}
 	
 	// Update is called once per frame
@@ -98,7 +100,9 @@ public class ModelController : MonoBehaviour {
                 float radius = Random.Range(1, 5) / 12f;
                 int angle = Random.Range(0, 360);
                 Vector3 pos = new Vector3(radius * Mathf.Cos(angle), 0, radius * Mathf.Sin(angle));
-                GameObject newObj = Object.Instantiate(gameObject, gameObject.transform.position + pos, gameObject.transform.rotation, gameObject.transform.parent.transform);
+                GameObject newObj = PhotonNetwork.Instantiate(gameObject.tag, gameObject.transform.position + pos, gameObject.transform.rotation,0);
+                //GameObject newObj =  Object.Instantiate(gameObject, gameObject.transform.position + pos, gameObject.transform.rotation, gameObject.transform.parent.transform);
+                newObj.transform.SetParent(gameObject.transform.parent);
                 newObj.SetActive(state);
                 added++;
             }
@@ -120,4 +124,36 @@ public class ModelController : MonoBehaviour {
             }
         }
     }
+
+    public void sendCount()
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("SyncCountRPC", PhotonTargets.All, (int)countSlider.value);
+        }
+    }
+    [PunRPC]
+    void SyncCountRPC(int value)
+    {
+        countSlider.value = value;
+        modifyCount();
+    }
+
+    public void sendSize()
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("SyncSizeRPC", PhotonTargets.All, scaleSlider.value);
+        }
+    }
+    [PunRPC]
+    void SyncSizeRPC(float value)
+    {
+        scaleSlider.value = value;
+        //Debug.Log("" + PhotonNetwork.isMasterClient);
+        modifyScale();
+    }
+
 }
