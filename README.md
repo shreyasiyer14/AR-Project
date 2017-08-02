@@ -7,7 +7,7 @@
 ## Technologies used:
 <ul>
 <li>Unity3D Game Engine (v5.6)</li>
-<li>Wikitude SDK / Kudan SDK / Vuforia SDK</li>
+<li>Vuforia SDK</li>
 <li>Photon Unity Networking</li>
 </ul>
 
