@@ -76,7 +76,7 @@ public class ModelController : MonoBehaviour {
         }
         foreach (GameObject model in models)
         {
-            Debug.Log(gameObject.tag + " " + value);
+            //Debug.Log(gameObject.tag + " " + value);
             model.SetActive(state);
         }
         modifyCount();
@@ -97,12 +97,13 @@ public class ModelController : MonoBehaviour {
             int added = 0;
             while (count > models.Length + added)
             {
-                float radius = Random.Range(1, 5) / 12f;
+                float radius = Random.Range(1, 5) / 20f;
                 int angle = Random.Range(0, 360);
                 Vector3 pos = new Vector3(radius * Mathf.Cos(angle), 0, radius * Mathf.Sin(angle));
                 GameObject newObj = PhotonNetwork.Instantiate(gameObject.tag, gameObject.transform.position + pos, gameObject.transform.rotation,0);
                 //GameObject newObj =  Object.Instantiate(gameObject, gameObject.transform.position + pos, gameObject.transform.rotation, gameObject.transform.parent.transform);
                 newObj.transform.SetParent(gameObject.transform.parent);
+                newObj.transform.localScale = gameObject.transform.localScale;
                 newObj.SetActive(state);
                 added++;
             }
@@ -168,7 +169,22 @@ public class ModelController : MonoBehaviour {
     void SyncActiveModelRPC(int value)
     {
         insectDropdown.value = value;
-        //Debug.Log("" + PhotonNetwork.isMasterClient);
+        //Debug.Log(value+" " + PhotonNetwork.isMasterClient);
         modifyState();
+    }
+    
+    public void SendWalkStatus()
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("SyncWalkAnimRPC", PhotonTargets.All);
+        }
+    }
+    [PunRPC]
+    void SyncWalkAnimRPC()
+    {
+        //Debug.Log(value+" " + PhotonNetwork.isMasterClient);
+        walkAnimStart();
     }
 }

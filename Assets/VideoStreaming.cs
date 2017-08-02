@@ -11,18 +11,18 @@ public class VideoStreaming : MonoBehaviour {
 
     public void SendVideo()
     {
-        if (!PhotonNetwork.isMasterClient)
+        /*if (!PhotonNetwork.isMasterClient)
         {
             PhotonView photonView = PhotonView.Get(this);
             Texture2D tex = GetComponent<MeshRenderer>().material.mainTexture as Texture2D;
             
-            /*if (tex == null)
-                Debug.Log("NULL");
-            else
-                Debug.Log("Correct");*/
+            //if (tex == null)
+             //   Debug.Log("NULL");
+            //else
+            //    Debug.Log("Correct");
 
             photonView.RPC("SyncVideoBackgroundRPC", PhotonTargets.All, tex.GetRawTextureData(),tex.width,tex.height,tex.format,tex.mipmapCount);
-        }
+        }*/
     }
     [PunRPC]
     void SyncVideoBackgroundRPC(byte[] tex,int width, int height, TextureFormat format,int mipmapCount)
